@@ -50,7 +50,6 @@ func sortedSquares1(nums []int) []int {
    return tmpNums
 }
 
-
 func sortedSquares(nums []int) []int {
 	tmpNums := make([]int, len(nums))
 	var left = 0
@@ -70,10 +69,8 @@ func sortedSquares(nums []int) []int {
 	return tmpNums
 }
 
-
 func main() {
 	nums := []int{-4,-1,0,3,10}
 	res := sortedSquares(nums)
 	fmt.Printf("res is: %v\n", res)
-
 }
