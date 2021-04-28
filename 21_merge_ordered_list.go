@@ -40,8 +40,30 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	return l3
 }
 
+func printList(list *ListNode) {
+	if list.Next != nil {
+		fmt.Printf("value is: %v\n", list)
+		list = list.Next
+	}
+	fmt.Printf("value is: %v\n", list)
+
+
+}
+
 func main() {
 	fmt.Printf("start now %v\n", time.Now().Format("2006-01-02 15:04:05"))
 	lastDay := time.Now().AddDate(0, -6, 0)
 	fmt.Printf("last is: %v\n", lastDay.Format("2006-01-02 15:04:05"))
+	node1 := ListNode{1, nil}
+	node2 := ListNode{2, nil}
+	node1.Next = &node2
+
+	node3 := ListNode{3, nil}
+	node4 := ListNode{4, nil}
+	node3.Next = &node4
+
+	//printList(&node3)
+	mergeList := mergeTwoLists(&node1, &node3)
+
+	printList(mergeList)
 }
