@@ -39,7 +39,7 @@ import (
 //链接：https://leetcode-cn.com/problems/first-missing-positive
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-func firstMissingPositive(nums []int) int {
+func firstMissingPositive1(nums []int) int {
 	sort.Ints(nums)
 	if len(nums) == 1 {
 		if nums[0] != 1 {
@@ -50,8 +50,8 @@ func firstMissingPositive(nums []int) int {
 	}
 	first := 0
 	i := 0
-	for i=0; i<len(nums); i++{
-		if nums[i] > 0{
+	for i = 0; i < len(nums); i++ {
+		if nums[i] > 0 {
 			first = i
 			break
 		}
@@ -60,24 +60,24 @@ func firstMissingPositive(nums []int) int {
 		return 1
 	}
 
-	for i=0; i<len(nums)-1; i++{
-		if nums[i] > 0{
+	for i = 0; i < len(nums)-1; i++ {
+		if nums[i] > 0 {
 			if nums[first] != 1 {
 				return 1
 			}
-			if nums[i+1] - nums[i] != 1 {
-				return nums[i]+1
-			} else if i+1 == len(nums)-1{
-				return nums[i+1]+1
+			if nums[i+1]-nums[i] != 1 {
+				return nums[i] + 1
+			} else if i+1 == len(nums)-1 {
+				return nums[i+1] + 1
 			}
 		}
 	}
-	if i == len(nums)-1 && len(nums) != 2{
-		return nums[i]+1
-	}else {
-		if nums[i] !=1 {
+	if i == len(nums)-1 && len(nums) != 2 {
+		return nums[i] + 1
+	} else {
+		if nums[i] != 1 {
 			return 1
-		}else {
+		} else {
 			return 2
 		}
 	}
@@ -85,20 +85,69 @@ func firstMissingPositive(nums []int) int {
 	return 0
 }
 
-func main() {
-	//nums := []int{1,2,0}
-	//fmt.Println(firstMissingPositive(nums))
-	//
-	//nums = []int{3,4,-1,1}
-	//fmt.Println(firstMissingPositive(nums))
-	//
-	//nums = []int{7,8,9,11,12}
-	//fmt.Println(firstMissingPositive(nums))
-	//
-	//nums = []int{2}
-	//fmt.Println(firstMissingPositive(nums))
+func firstMissingPositive(nums []int) int {
+	sort.Ints(nums)
 
-	nums := []int{2,1}
+	index := 0
+	for i := 0; i < len(nums); i++ {
+		if nums[i] > 0 {
+			index = i
+			break
+		}
+	}
+	tmpNums := nums[index:]
+	afterRemoveNums := RemoveDuplicate(&tmpNums)
+
+	var j = 0
+	for j = 0; j < len(afterRemoveNums); j++ {
+		if afterRemoveNums[j] != j+1 {
+			return j + 1
+		}
+	}
+
+	if j == len(afterRemoveNums) {
+		return afterRemoveNums[j-1] + 1
+	}
+	return 0
+}
+
+func RemoveDuplicate(list *[]int) []int {
+	var x = []int{}
+	for _, i := range *list {
+		if len(x) == 0 {
+			x = append(x, i)
+		} else {
+			for k, v := range x {
+				if i == v {
+					break
+				}
+				if k == len(x)-1 {
+					x = append(x, i)
+				}
+			}
+		}
+	}
+
+	return x
+}
+
+func main() {
+	nums := []int{1, 2, 0}
+	fmt.Println(firstMissingPositive(nums))
+
+	nums = []int{3, 4, -1, 1}
+	fmt.Println(firstMissingPositive(nums))
+
+	nums = []int{7, 8, 9, 11, 12}
+	fmt.Println(firstMissingPositive(nums))
+
+	nums = []int{2}
+	fmt.Println(firstMissingPositive(nums))
+
+	nums = []int{2, 1}
+	fmt.Println(firstMissingPositive(nums))
+
+	nums = []int{0, 2, 2, 1, 1}
 	fmt.Println(firstMissingPositive(nums))
 
 }
