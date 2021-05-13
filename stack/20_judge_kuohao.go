@@ -1,4 +1,4 @@
-package main
+package stack
 
 import "fmt"
 //栈题目汇总

@@ -1,4 +1,4 @@
-package main
+package list
 
 //链表相关
 //题目:206,141,21,19,876
