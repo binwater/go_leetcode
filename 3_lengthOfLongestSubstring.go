@@ -62,7 +62,6 @@ func lengthOfLongestSubstring1(s string) int {
 	return max
 }
 
-
 func lengthOfLongestSubstring(s string) int {
 	var max, index = 0, 0
 	bStr := []byte(s)
