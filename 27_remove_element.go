@@ -75,5 +75,4 @@ func main() {
 	numSlice := []int{3,2,4,5,2,1,2,6}
 	count := removeElement(numSlice, 2)
 	fmt.Printf("\nresult is: %v\n", count)
-
 }

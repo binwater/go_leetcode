@@ -69,6 +69,4 @@ func removeDuplicates(nums []int) int {
 func main() {
 	testNums := []int{1,1,3,4,5,5,6,6,7}
 	fmt.Printf("\n%v", removeDuplicates(testNums))
-
-
 }
