@@ -54,7 +54,21 @@ package main
  *     Next *ListNode
  * }
  */
+
 func hasCycle(head *ListNode) bool {
+	tmp := make(map[*ListNode]bool, 0)
+
+	for head != nil {
+		if _, ok := tmp[head]; ok {
+			return true
+		}
+		tmp[head]=true
+		head = head.Next
+	}
+	return false
+}
+
+func hasCycle1(head *ListNode) bool {
 	slowNode := head
 	fastNode := head
 	for fastNode != nil && fastNode.Next != nil{
