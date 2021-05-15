@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 //给你一个链表数组，每个链表都已经按升序排列。
 //
 //请你将所有链表合并到一个升序链表中，返回合并后的链表。
@@ -54,9 +52,50 @@ import "fmt"
  * }
  */
 func mergeKLists(lists []*ListNode) *ListNode {
+	if len(lists)==0{
+		return nil
+	}
+	result:=lists[0]
+	for i:=1;i<len(lists);i++{
+		result=Merge(result,lists[i])
+	}
+	return result
+}
 
+func Merge(l1 *ListNode,l2 *ListNode)*ListNode { 
+	if l1 == nil {
+		return l2
+	}
+	if l2 == nil {
+		return l1
+	}
+	var res *ListNode
+	if l1.Val >= l2.Val {
+		res = l2
+		res.Next = Merge(l1, l2.Next)
+	} else {
+		res = l1
+		res.Next = Merge(l1.Next, l2)
+	}
+	return res
 }
 
 func main() {
-	fmt.Println("test merge lists")
+	node := ListNode{1, nil}
+	node.Next = &ListNode{4, nil}
+	node.Next.Next = &ListNode{6, nil}
+
+	node1 := ListNode{3, nil}
+	node1.Next = &ListNode{7, nil}
+	node1.Next.Next = &ListNode{8, nil}
+
+	node2 := ListNode{2, nil}
+	node2.Next = &ListNode{5, nil}
+
+	kLists := make([]*ListNode, 0)
+	kLists = append(kLists, &node, &node1, &node2)
+
+	after := mergeKLists(kLists)
+
+	printList(after)
 }

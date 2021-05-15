@@ -1,4 +1,4 @@
-package list
+package main
 
 import (
 	"fmt"
@@ -16,12 +16,13 @@ import (
 //链接：https://leetcode-cn.com/problems/merge-two-sorted-lists
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-//Definition for singly-linked list.
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
 func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1==nil{
 		return l2
@@ -38,16 +39,6 @@ func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 		l3.Next = mergeTwoLists(l1.Next, l2)
 	}
 	return l3
-}
-
-func printList(list *ListNode) {
-	if list.Next != nil {
-		fmt.Printf("value is: %v\n", list)
-		list = list.Next
-	}
-	fmt.Printf("value is: %v\n", list)
-
-
 }
 
 func main() {

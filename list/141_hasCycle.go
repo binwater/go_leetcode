@@ -1,4 +1,6 @@
-package list
+package main
+
+import "fmt"
 
 //给定一个链表，判断链表中是否有环。
 //
@@ -6,13 +8,13 @@ package list
 //
 //如果链表中存在环，则返回 true 。 否则，返回 false 。
 //
-// 
+//
 //
 //进阶：
 //
 //你能用 O(1)（即，常量）内存解决此问题吗？
 //
-// 
+//
 //
 //示例 1：
 //
@@ -35,7 +37,7 @@ package list
 //输入：head = [1], pos = -1
 //输出：false
 //解释：链表中没有环。
-// 
+//
 //
 //提示：
 //
@@ -62,7 +64,7 @@ func hasCycle(head *ListNode) bool {
 		if _, ok := tmp[head]; ok {
 			return true
 		}
-		tmp[head]=true
+		tmp[head] = true
 		head = head.Next
 	}
 	return false
@@ -71,13 +73,28 @@ func hasCycle(head *ListNode) bool {
 func hasCycle1(head *ListNode) bool {
 	slowNode := head
 	fastNode := head
-	for fastNode != nil && fastNode.Next != nil{
+	for fastNode != nil && fastNode.Next != nil {
 		slowNode = slowNode.Next
 		fastNode = fastNode.Next.Next
-		if slowNode == fastNode{
+		if slowNode == fastNode {
 			return true
 		}
 	}
 
 	return false
+}
+
+func main() {
+	node := ListNode{1, nil}
+	node.Next = &ListNode{2, nil}
+	node.Next.Next = &ListNode{3, nil}
+	node.Next.Next.Next = &ListNode{4, nil}
+	fmt.Println(hasCycle1(&node))
+
+	node = ListNode{1, nil}
+	node.Next = &ListNode{2, nil}
+	node.Next.Next = &ListNode{3, nil}
+	tmp := node.Next
+	node.Next.Next.Next = tmp
+	fmt.Println(hasCycle1(&node))
 }

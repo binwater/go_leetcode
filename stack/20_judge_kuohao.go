@@ -1,8 +1,6 @@
 package stack
 
 import "fmt"
-//栈题目汇总
-//题目：20,155,232,844,224,682,496
 
 //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串，判断字符串是否有效。
 //
@@ -75,5 +73,4 @@ func main() {
 	fmt.Printf("judge is: %v\n", isValid(test))
 	test = "{[qdag]}"
 	fmt.Printf("judge is: %v\n", isValid(test))
-
 }

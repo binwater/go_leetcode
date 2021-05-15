@@ -149,5 +149,4 @@ func main() {
 
 	nums = []int{0, 2, 2, 1, 1}
 	fmt.Println(firstMissingPositive(nums))
-
 }
