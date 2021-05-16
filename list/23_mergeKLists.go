@@ -52,34 +52,40 @@ package main
  * }
  */
 func mergeKLists(lists []*ListNode) *ListNode {
-	if len(lists)==0{
+	if len(lists) == 0 {
 		return nil
 	}
-	result:=lists[0]
-	for i:=1;i<len(lists);i++{
-		result=Merge(result,lists[i])
+
+	result := lists[0]
+	for i:=1; i<len(lists); i++{
+		result = mergeTwo(result, lists[i])
 	}
+
 	return result
 }
 
-func Merge(l1 *ListNode,l2 *ListNode)*ListNode { 
+func mergeTwo(l1, l2 *ListNode) *ListNode {
 	if l1 == nil {
 		return l2
 	}
 	if l2 == nil {
 		return l1
 	}
-	var res *ListNode
-	if l1.Val >= l2.Val {
-		res = l2
-		res.Next = Merge(l1, l2.Next)
+
+	var l3 *ListNode
+
+	if l1.Val > l2.Val{
+		l3 = l2
+		l3.Next = mergeTwo(l1, l2.Next)
 	} else {
-		res = l1
-		res.Next = Merge(l1.Next, l2)
+		l3 = l1
+		l3.Next = mergeTwo(l1.Next, l2)
 	}
-	return res
+
+	return l3
 }
 
+//hard
 func main() {
 	node := ListNode{1, nil}
 	node.Next = &ListNode{4, nil}

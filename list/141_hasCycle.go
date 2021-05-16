@@ -57,44 +57,42 @@ import "fmt"
  * }
  */
 
-func hasCycle(head *ListNode) bool {
-	tmp := make(map[*ListNode]bool, 0)
-
-	for head != nil {
-		if _, ok := tmp[head]; ok {
+func hasCycle1(head *ListNode) bool {
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		if fast == slow {
 			return true
 		}
-		tmp[head] = true
+	}
+	return false
+}
+
+func hasCycle(head *ListNode) bool {
+	tmpMap := make(map[*ListNode]int)
+	for head != nil {
+		if _, ok := tmpMap[head]; ok{
+			return true
+		}
+		tmpMap[head] = 1
 		head = head.Next
 	}
 	return false
 }
 
-func hasCycle1(head *ListNode) bool {
-	slowNode := head
-	fastNode := head
-	for fastNode != nil && fastNode.Next != nil {
-		slowNode = slowNode.Next
-		fastNode = fastNode.Next.Next
-		if slowNode == fastNode {
-			return true
-		}
-	}
-
-	return false
-}
-
+//easy
 func main() {
 	node := ListNode{1, nil}
 	node.Next = &ListNode{2, nil}
 	node.Next.Next = &ListNode{3, nil}
 	node.Next.Next.Next = &ListNode{4, nil}
-	fmt.Println(hasCycle1(&node))
+	fmt.Println(hasCycle(&node))
 
 	node = ListNode{1, nil}
 	node.Next = &ListNode{2, nil}
 	node.Next.Next = &ListNode{3, nil}
 	tmp := node.Next
 	node.Next.Next.Next = tmp
-	fmt.Println(hasCycle1(&node))
+	fmt.Println(hasCycle(&node))
 }

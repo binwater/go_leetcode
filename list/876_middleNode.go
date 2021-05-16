@@ -40,19 +40,22 @@ func middleNode(head *ListNode) *ListNode {
 		return nil
 	}
 
-	fastNode, slowNode := head, head
+	first, second := head, head
 
-	for fastNode != nil && fastNode.Next != nil {
-		slowNode = slowNode.Next
-		fastNode = fastNode.Next.Next
+	for first != nil && first.Next != nil{
+		second = second.Next
+		first = first.Next.Next
 	}
-	return slowNode
+
+	return second
 }
 
+//easy
 func main() {
 	node := ListNode{1, nil}
 	node.Next = &ListNode{2, nil}
 	node.Next.Next = &ListNode{3, nil}
 	node.Next.Next.Next = &ListNode{4, nil}
+	node.Next.Next.Next.Next = &ListNode{5, nil}
 	fmt.Println(middleNode(&node))
 }

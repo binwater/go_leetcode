@@ -44,12 +44,11 @@ type ListNode struct {
 }
 
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
-	headTmp := ListNode{0,head}
+	tmpHead := &ListNode{0, head}
 
-	firstNode := &headTmp
-	secondNode := &headTmp
+	firstNode := tmpHead
+	secondNode := tmpHead
 
-	//两个node之前差值为n
 	for i:=1; i<=n+1; i++{
 		firstNode = firstNode.Next
 	}
@@ -61,7 +60,7 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 
 	secondNode.Next = secondNode.Next.Next
 
-	return headTmp.Next
+	return tmpHead.Next
 }
 
 func printList(list *ListNode) {
@@ -72,6 +71,7 @@ func printList(list *ListNode) {
 	fmt.Printf("value is: %v\n", list.Val)
 }
 
+//mid
 func main1() {
 	node := ListNode{1, nil}
 	node.Next = &ListNode{2, nil}
@@ -80,6 +80,6 @@ func main1() {
 
 	printList(&node)
 	after := removeNthFromEnd(&node, 3)
-	fmt.Println("after delete")
+	fmt.Println("after delete", after)
 	printList(after)
 }

@@ -52,27 +52,30 @@ func reverseList(head *ListNode) *ListNode {
 		return head
 	}
 
-	pre, cur := head, head.Next
-	pre.Next = nil
+	pre := head
+	cur := head.Next
 
-	for cur.Next != nil {
-		nextNode := cur.Next
+	pre.Next = nil
+	for cur != nil && cur.Next != nil{
+		next := cur.Next
 
 		cur.Next = pre
 
-		pre = cur
-		cur = nextNode
+		pre  = cur
+		cur = next
 	}
+
 	cur.Next = pre
 
 	return cur
 }
 
+//easy
 func main() {
 	node := ListNode{1, nil}
-	node.Next = &ListNode{2, nil}
-	node.Next.Next = &ListNode{3, nil}
-	node.Next.Next.Next = &ListNode{4, nil}
+	//node.Next = &ListNode{2, nil}
+	//node.Next.Next = &ListNode{3, nil}
+	//node.Next.Next.Next = &ListNode{4, nil}
 	printList(&node)
 	fmt.Println("after reverse ")
 	after := reverseList(&node)
