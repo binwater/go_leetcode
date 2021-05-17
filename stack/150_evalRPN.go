@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 //根据 逆波兰表示法，求表达式的值。
 //
@@ -93,6 +95,10 @@ func evalRPN(tokens []string) int {
 				}
 			}
 			stack = append(stack, sign * num)
+
+			//string to int
+			//tmp, _ := strconv.Atoi(token)
+			//stack = append(stack, tmp)
 		}
 	}
 	return stack[0]
