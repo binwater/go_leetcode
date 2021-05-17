@@ -60,6 +60,7 @@ func isValid(s string) bool {
 	}
 }
 
+//easy
 func main() {
 	test := "()"
 	fmt.Printf("judge is: %v\n", isValid(test))
