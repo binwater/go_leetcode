@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 //设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
@@ -11,7 +10,7 @@ import (
 //pop() —— 删除栈顶的元素。
 //top() —— 获取栈顶元素。
 //getMin() —— 检索栈中的最小元素。
-// 
+//
 //
 //示例:
 //
@@ -31,7 +30,7 @@ import (
 //minStack.pop();
 //minStack.top();      --> 返回 0.
 //minStack.getMin();   --> 返回 -2.
-// 
+//
 //
 //提示：
 //
@@ -41,55 +40,37 @@ import (
 //链接：https://leetcode-cn.com/problems/min-stack
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-
 type MinStack struct {
-	value []int
-	index int
+	allStack []int
+	minStack []int
 }
-
 
 /** initialize your data structure here. */
 func Constructor() MinStack {
-	tmp := []int{}
-	return MinStack{tmp,0}
+	return MinStack{}
 }
 
-
-func (this *MinStack) Push(val int)  {
-	this.value = append(this.value, val)
-	this.index++
-}
-
-
-func (this *MinStack) Pop()  {
-	if len(this.value) > 0 {
-		this.index--
-		this.value = this.value[:this.index]
+func (this *MinStack) Push(val int) {
+	this.allStack = append(this.allStack, val)
+	if len(this.minStack) == 0 || val <= this.minStack[len(this.minStack)-1] {
+		this.minStack = append(this.minStack, val)
 	}
 }
 
+func (this *MinStack) Pop() {
+	if this.minStack[len(this.minStack)-1] == this.allStack[len(this.allStack)-1] {
+		this.minStack = this.minStack[:len(this.minStack)-1]
+	}
+	this.allStack = this.allStack[:len(this.allStack)-1]
+}
 
 func (this *MinStack) Top() int {
-	tmp := 0
-	if len(this.value) > 0 {
-		tmpIndex := this.index-1
-		tmp = this.value[tmpIndex]
-	}
-	return tmp
+	return this.allStack[len(this.allStack)-1]
 }
-
 
 func (this *MinStack) GetMin() int {
-	tmp := make([]int, len(this.value))
-	tmpValue := *this
-	copy(tmp, tmpValue.value)
-	sort.Ints(tmp)
-	if len(tmp) > 0 {
-		return tmp[0]
-	}
-	return 0
+	return this.minStack[len(this.minStack)-1]
 }
-
 
 /**
  * Your MinStack object will be instantiated and called as such:
@@ -105,19 +86,20 @@ func main() {
 	minStack.Push(-2)
 	minStack.Push(0)
 	minStack.Push(-3)
-	fmt.Println(minStack.value)
+	fmt.Println(minStack.allStack)
 	//minStack.getMin();   --> 返回 -3.
 	tmpMin := minStack.GetMin()
-	fmt.Println(tmpMin, minStack.value)
+	fmt.Println(tmpMin, minStack.minStack)
 	//minStack.pop();
-	//minStack.top();      --> 返回 0.
-	//minStack.getMin();   --> 返回 -2.
 	minStack.Pop()
-	fmt.Println("pop is", minStack.value)
+	fmt.Println("pop is", minStack.allStack)
+	//minStack.top();      --> 返回 0.
 	tmpMin = minStack.Top()
 	fmt.Println(tmpMin)
-	fmt.Println(minStack.value)
+	fmt.Println(minStack.allStack)
+	//minStack.getMin();   --> 返回 -2.
 	tmpMin = minStack.GetMin()
+	fmt.Println(minStack.minStack)
 	fmt.Println(tmpMin)
 
 }
