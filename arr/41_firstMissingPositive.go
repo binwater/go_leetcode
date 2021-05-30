@@ -1,4 +1,4 @@
-package arr
+package main
 
 import (
 	"fmt"
