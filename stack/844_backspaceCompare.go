@@ -57,17 +57,21 @@ func backspaceCompare(s string, t string) bool {
 }
 
 func handleStr(input string) string {
+	fmt.Println(input)
 	var stack = []string{}
-	for item := range input{
-		tmp := fmt.Sprintf("%c", item)
+	for _, v := range input{
+		tmp := fmt.Sprintf("%c", v)
 		switch tmp{
 		case "#":
-			stack =  stack[:len(stack) - 1]
+			if len(stack)!=0{
+				stack =  stack[:len(stack) - 1]
+			}
 		default:
-			stack = append(stack, string(tmp))
+			stack = append(stack, tmp)
 		}
 	}
 	tmp := ""
+	fmt.Println(len(stack), stack)
 	for _, v := range stack{
 		tmp += v
 	}
