@@ -53,7 +53,30 @@ func maxProfit(prices []int) int {
 	return max
 }
 
+func maxProfit2(prices []int) int {
+	if len(prices)<=1{
+		return 0
+	}
+
+	max := 0
+	pre := 0
+	for i:=1; i<len(prices); i++{
+		diff := prices[i]-prices[i-1]
+
+		pre = maxValue(pre+diff, 0)
+		max = maxValue(pre, max)
+	}
+	return max
+}
+
+func maxValue(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 func main() {
 	prices := []int{7,1,5,3,6,4}
-	fmt.Println(maxProfit(prices))
+	fmt.Println(maxProfit2(prices))
 }
