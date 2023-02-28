@@ -1,4 +1,4 @@
-package main
+package dev_find
 
 import "fmt"
 

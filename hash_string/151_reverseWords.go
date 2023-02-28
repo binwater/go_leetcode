@@ -1,4 +1,4 @@
-package main
+package hash_string
 
 import (
 	"fmt"

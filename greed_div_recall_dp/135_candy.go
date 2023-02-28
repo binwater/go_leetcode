@@ -1,4 +1,4 @@
-package main
+package greed_div_recall_dp
 
 import "fmt"
 
