@@ -1,12 +1,12 @@
-package tree
+package main
 
 import "fmt"
 
 type TreeNode2 struct {
-	     Val int
-	     Left *TreeNode2
-	     Right *TreeNode2
-	 }
+	Val   int
+	Left  *TreeNode2
+	Right *TreeNode2
+}
 
 /**
  * Definition for a binary tree node.
@@ -17,7 +17,7 @@ type TreeNode2 struct {
  * }
  */
 func invertTree(root *TreeNode2) *TreeNode2 {
-	if root==nil{
+	if root == nil {
 		return nil
 	}
 
@@ -30,20 +30,20 @@ func invertTree(root *TreeNode2) *TreeNode2 {
 	return root
 }
 
-func invertTree2(root *TreeNode) *TreeNode{
+func invertTree2(root *TreeNode) *TreeNode {
 	if root == nil {
 		return nil
 	}
 
 	queue := []*TreeNode{root}
-	for len(queue) != 0{
+	for len(queue) != 0 {
 		head := queue[0]
 		queue = queue[1:]
 		head.Left, head.Right = head.Right, head.Left
-		if head.Left != nil{
+		if head.Left != nil {
 			queue = append(queue, head.Left)
 		}
-		if head.Right != nil{
+		if head.Right != nil {
 			queue = append(queue, head.Right)
 		}
 	}

@@ -1,21 +1,21 @@
-package tree
+package main
 
 import "fmt"
 
-type TreeNode struct {
-     Val int
-     Left *TreeNode
-     Right *TreeNode
-}
+//type TreeNode struct {
+//     Val int
+//     Left *TreeNode
+//     Right *TreeNode
+//}
 
 func levelOrder(root *TreeNode) [][]int {
 	var ret [][]int
 	queue := []*TreeNode{root}
 	level := 0
-	for len(queue) >0 {
+	for len(queue) > 0 {
 		ret = append(ret, []int{})
-		for count := len(queue); count >0; count--{
-			if queue[0].Left != nil{
+		for count := len(queue); count > 0; count-- {
+			if queue[0].Left != nil {
 				queue = append(queue, queue[0].Left)
 			}
 			if queue[0].Right != nil {

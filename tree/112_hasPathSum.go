@@ -1,4 +1,4 @@
-package tree
+package main
 
 import "fmt"
 
@@ -57,18 +57,18 @@ func hasPathSum(root *TreeNode, targetSum int) bool {
 }
 
 func helper(root *TreeNode, cur, targetSum int) bool {
-	if root==nil{
+	if root == nil {
 		return false
 	}
-	cur = cur+root.Val
-	if root.Left == nil && root.Right == nil{
-		return cur==targetSum
-	}else{
+	cur = cur + root.Val
+	if root.Left == nil && root.Right == nil {
+		return cur == targetSum
+	} else {
 		return helper(root.Left, cur, targetSum) || helper(root.Right, cur, targetSum)
 	}
 }
 
-func main()  {
+func main() {
 	root := TreeNode{1, nil, nil}
 	root.Left = &TreeNode{2, nil, nil}
 	root.Right = &TreeNode{3, nil, nil}
